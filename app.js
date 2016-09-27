@@ -78,6 +78,25 @@ var capitolHill = {
   },
 };
 
+var alki = {
+  minCustomersHour: 2,
+  maxCustomersHour: 16,
+  avgCookiesCustomer: 4.6,
+  randCustomersPerHour: [],
+  randCookiesPerHour: [],
+
+  calcRandCustomersPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCustomersPerHour.push(Math.floor(Math.random() * (this.maxCustomersHour - this.minCustomersHour + 1)) + this.minCustomersHour);
+    }
+  },
+  calcRandCookiesPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCookiesPerHour[i] = Math.round(this.randCustomersPerHour[i] * this.avgCookiesCustomer);
+    }
+  },
+};
+
 //calling firstAndPike
 firstAndPike.calcRandCustomersPerHour();
 console.log(firstAndPike.randCustomersPerHour);
@@ -105,3 +124,10 @@ console.log(capitolHill.randCustomersPerHour);
 
 capitolHill.calcRandCookiesPerHour();
 console.log(capitolHill.randCookiesPerHour);
+
+//calling Alki
+alki.calcRandCustomersPerHour();
+console.log(alki.randCustomersPerHour);
+
+alki.calcRandCookiesPerHour();
+console.log(alki.randCookiesPerHour);
