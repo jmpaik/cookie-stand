@@ -20,11 +20,38 @@ var firstAndPike = {
     }
   },
 };
+
+var seatacAirport = {
+  minCustomersHour: 3,
+  maxCustomersHour: 24,
+  avgCookiesCustomer: 1.2,
+  randCustomersPerHour: [],
+  randCookiesPerHour: [],
+
+  calcRandCustomersPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCustomersPerHour.push(Math.floor(Math.random() * (this.maxCustomersHour - this.minCustomersHour + 1)) + this.minCustomersHour);
+    }
+  },
+  calcRandCookiesPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCookiesPerHour[i] = Math.round(this.randCustomersPerHour[i] * this.avgCookiesCustomer);
+    }
+  },
+};
+//calling firstAndPike
 firstAndPike.calcRandCustomersPerHour();
 console.log(firstAndPike.randCustomersPerHour);
 
 firstAndPike.calcRandCookiesPerHour();
 console.log(firstAndPike.randCookiesPerHour);
+
+//calling seatacAirport
+seatacAirport.calcRandCustomersPerHour();
+console.log(seatacAirport.randCustomersPerHour);
+
+seatacAirport.calcRandCookiesPerHour();
+console.log(seatacAirport.randCookiesPerHour);
 
 
 
