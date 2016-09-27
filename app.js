@@ -59,6 +59,25 @@ var seattleCenter = {
   },
 };
 
+var capitolHill = {
+  minCustomersHour: 20,
+  maxCustomersHour: 38,
+  avgCookiesCustomer: 2.3,
+  randCustomersPerHour: [],
+  randCookiesPerHour: [],
+
+  calcRandCustomersPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCustomersPerHour.push(Math.floor(Math.random() * (this.maxCustomersHour - this.minCustomersHour + 1)) + this.minCustomersHour);
+    }
+  },
+  calcRandCookiesPerHour: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.randCookiesPerHour[i] = Math.round(this.randCustomersPerHour[i] * this.avgCookiesCustomer);
+    }
+  },
+};
+
 //calling firstAndPike
 firstAndPike.calcRandCustomersPerHour();
 console.log(firstAndPike.randCustomersPerHour);
@@ -79,3 +98,10 @@ console.log(seattleCenter.randCustomersPerHour);
 
 seattleCenter.calcRandCookiesPerHour();
 console.log(seattleCenter.randCookiesPerHour);
+
+//calling capitolHill
+capitolHill.calcRandCustomersPerHour();
+console.log(capitolHill.randCustomersPerHour);
+
+capitolHill.calcRandCookiesPerHour();
+console.log(capitolHill.randCookiesPerHour);
