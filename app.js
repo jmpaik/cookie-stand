@@ -3,8 +3,8 @@
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var cookieStands = [];
-//var salesPerHour = [];
-//var grandTotalSales = 0;
+var salesPerHour = [];
+var grandTotalSales = 0;
 
 function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustomer) {
   this.name = name;
@@ -67,7 +67,19 @@ function renderTableHeader() {
   trEl.appendChild(thEl); //Add totals to table header row in last column
   tableDataDisplay.appendChild(trEl); //Add table header row to daily data table
 };
+function renderTableFooter() {
+  var tableDataDisplay = document.getElementById('salesReport_js');
+  var trEl = document.createElement('tr'); //Create row for business location
+  var tdEl = document.createElement('td'); //Create column for business location name
+  tdEl.textContent = 'Totals';
+  trEl.appendChild('tdEl');
+  for (var a = 0; a <= hours.length; a++) { //Creates column for each hour of the day
+    tdEl = document.createElement('td'); //Creates column for each hour of day
+    tdEl.textContent = salesPerHour[a]; //Adds hourly sales of cookies per business location[i]
+    trEl.appendChild(tdEl); //Adds hourly sales of cookies per business to column for current business location[i] row
+  }
 
+}
 
 renderTableHeader();
 
