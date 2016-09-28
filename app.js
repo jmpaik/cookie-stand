@@ -51,9 +51,25 @@ function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustome
   cookieStands.push(this);
   this.calculate();
 }
+function renderTableHeader() {
+  var tableDataDisplay = document.getElementById('salesReport_js');
+  var trEl = document.createElement('tr'); //Creates a row for each business
+  var thEl = document.createElement('th'); //Creates a table header column to hold hours
+  thEl.textContent = ''; //Created blank space as the first column in the table header row
+  trEl.appendChild(thEl); //Add hours of day to table header row
+  for (var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');//Creates table header row to hold hours of the day
+    thEl.textContent = hours[i]; //Adds hours of the day to table header
+    trEl.appendChild(thEl); //Adds hour of the day to the table header row
+  }
+  thEl = document.createElement('th'); //Create a table header row for daily totals
+  thEl.textContent = 'Daily Location Totals'; //Add totals to the table header row in last column
+  trEl.appendChild(thEl); //Add totals to table header row in last column
+  tableDataDisplay.appendChild(trEl); //Add table header row to daily data table
+};
 
 
-
+renderTableHeader();
 
 new CookieStand('First And Pike', 23, 65, 6.3);
 new CookieStand('Seatac Airport', 3, 24, 1.2);
