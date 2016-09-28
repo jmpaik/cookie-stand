@@ -30,7 +30,7 @@ function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustome
     for (var i = 0; i < cookieStands.length; i++) {
       var trEl = document.createElement('tr'); //Creates rows for business location
       var tdEl = document.createElement('td'); //Creates columns for business location name
-      tdEl.textContent = cookieStands[i].location; //Adds business location name to columns
+      tdEl.textContent = cookieStands[i].name; //Adds business location name to columns
       trEl.appendChild(tdEl); //Adds business location name column to row for current business location[i]
       for (var a = 0; a < hours.length; a++) {
         tdEl = document.createElement('td'); //Creates columns for hours
@@ -72,15 +72,28 @@ function renderTableFooter() {
   var trEl = document.createElement('tr'); //Create row for business location
   var tdEl = document.createElement('td'); //Create column for business location name
   tdEl.textContent = 'Totals';
-  trEl.appendChild('tdEl');
+  trEl.appendChild(tdEl);
   for (var a = 0; a <= hours.length; a++) { //Creates column for each hour of the day
     tdEl = document.createElement('td'); //Creates column for each hour of day
     tdEl.textContent = salesPerHour[a]; //Adds hourly sales of cookies per business location[i]
     trEl.appendChild(tdEl); //Adds hourly sales of cookies per business to column for current business location[i] row
   }
-
+  tdEl.textContent = grandTotalSales; //Creates column for grand total
+  trEl.appendChild(tdEl); //Adds daily cookies total sold to business location row
+  tableDataDisplay.appendChild(trEl); //Adds row for each business location to reporting table
+};
+function calcGrandTotal() {
+  for (var i = 0; i < hours.length; i++) {
+    var hourlyCookieSales = 0;
+    for (var x = 0; x < cookieStands.length; x++) {
+      hourlyCookieSales += cookieStands[x].randCookiesPerHour[i];
+    }
+    salesPerHour.push(hourlyCookieSales);
+  }
+  for (var y = 0; y < cookieStands.length; y++) {
+    grandTotalSales += cookieStands[y].CookieSales;
+  }
 }
-
 renderTableHeader();
 
 new CookieStand('First And Pike', 23, 65, 6.3);
@@ -88,8 +101,6 @@ new CookieStand('Seatac Airport', 3, 24, 1.2);
 new CookieStand('Seattle Center', 11, 38, 3.7);
 new CookieStand('Capitol Hill', 20, 38, 2.3);
 new CookieStand('Alki', 2, 16, 4.6);
-// firstAndPike.render();
-// seatacAirport.render();
-// seattleCenter.render();
-// capitolHill.render();
-// alki.render();
+
+calcGrandTotal();
+renderTableFooter();
