@@ -63,7 +63,7 @@ function renderTableHeader() {
     trEl.appendChild(thEl); //Adds hour of the day to the table header row
   }
   thEl = document.createElement('th'); //Create a table header row for daily totals
-  thEl.textContent = 'Daily Location Totals'; //Add totals to the table header row in last column
+  thEl.textContent = 'Location Totals'; //Add totals to the table header row in last column
   trEl.appendChild(thEl); //Add totals to table header row in last column
   tableDataDisplay.appendChild(trEl); //Add table header row to daily data table
 };
