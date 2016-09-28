@@ -22,7 +22,7 @@ function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustome
   this.calcRandCookiesPerHour = function() {
     for (var i = 0; i < hours.length; i++) {
       this.randCookiesPerHour[i] = Math.round(this.randCustomersPerHour[i] * this.avgCookiesCustomer);
-      this.totalCookieSales += this.randCookiesPerHour[i];
+      this.CookieSales += this.randCookiesPerHour[i];
     }
   };
   this.renderTableBody = function () {
