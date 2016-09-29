@@ -6,30 +6,46 @@
     <link href="style.css" rel="stylesheet">
   </head>
 
-  <body>
-    <header>
-      <h1>Salmon Cookie Stands</h1>
-    </header>
-    <table id="salesReport_js"></table>
-    <script src="app.js"></script>
+    <body>
+      <header>
+        <h1>Salmon Cookie Stands</h1>
+      </header>
 
-<!-- //html FORMS
-<form id="chat-form">
-    <fieldset>
-      <legend>Chat submission form</legend>
+      <main>
+        <table id="salesReport_js"></table>
+        <form id="cookiestand-form">
+          <fieldset>
+            <legend>Cookie Stand Data Submission</legend>
 
-      <label for="who">Who: </label>
-      <input name="who" type="text" />
+            <div>
+            <label for="">New Location</label>
+            <br>
+            <input type="text" name="new_location" size="40">
+            </div>
 
-      <label for="says">Comment: </label>
-      <input name="says" type="text" size="50" />
+            <div>
+            <label for="">Minimum Customers Per Hour</label>
+            <br>
+            <input type="text" name="min_customers" size="40">
+            </div>
 
-      <button type="submit">Create new comment!</button>
-    </fieldset>
-  </form>
+            <div>
+            <label for="">Maximum Customers Per Hour</label>
+            <br>
+            <input type="text" name="max_customers" size="40">
+            </div>
 
-  <button id="clear-chat-list">Clear all comments!</button> -->
+            <div>
+            <label for="">Average Cookies Per Customer</label>
+            <br>
+            <input type="text" name="avg_cookies" size="40">
+            </div>
 
-  </body>
+            <button type ="submit" name="submit" class="button">Add</button>
+          </fieldset>
+        </form>
+      </main>
 
+  <script src="app.js"></script>
+    </body>
   </html>
