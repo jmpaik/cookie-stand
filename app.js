@@ -5,6 +5,7 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 var cookieStands = [];
 var salesPerHour = [];
 var grandTotalSales = 0;
+var newLocation = document.getElementById('newBusinessData');
 
 function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustomer) {
   this.name = name;
