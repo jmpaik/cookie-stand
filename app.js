@@ -5,32 +5,33 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 var cookieStands = [];
 var salesPerHour = [];
 var grandTotalSales = 0;
-var newLocation = document.getElementById('newBusinessData');
+var newLocation = document.getElementById('cookiestand_form');
+var tableDataDisplay = document.getElementById('salesReport_js');
 
-function CookieStand(name, minCustomersHour, maxCustomersHour, avgCookiesCustomer) {
-  this.name = name;
+function CookieStand(newLocation, minCustomersHour, maxCustomersHour, avgCookiesCustomer) {
+  this.newLocation = newLocation;
   this.minCustomersHour = minCustomersHour;
   this.maxCustomersHour = maxCustomersHour;
   this.avgCookiesCustomer = avgCookiesCustomer;
   this.randCustomersPerHour = [];
   this.randCookiesPerHour = [];
   this.CookieSales = 0;
-  this.calcRandCustomersPerHour = function() {
+  CookieStand.prototype.calcRandCustomersPerHour = function() {
     for (var i = 0; i < hours.length; i++) {
       this.randCustomersPerHour.push(Math.floor(Math.random() * (this.maxCustomersHour - this.minCustomersHour + 1)) + this.minCustomersHour);
     }
   };
-  this.calcRandCookiesPerHour = function() {
+  CookieStand.prototype.calcRandCookiesPerHour = function() {
     for (var i = 0; i < hours.length; i++) {
       this.randCookiesPerHour[i] = Math.round(this.randCustomersPerHour[i] * this.avgCookiesCustomer);
       this.CookieSales += this.randCookiesPerHour[i];
     }
   };
-  this.renderTableBody = function () {
+  CookieStand.prototype.renderTableBody = function () {
     var tableDataDisplay = document.getElementById('salesReport_js');
     var trEl = document.createElement('tr'); //Creates rows for business location
     var tdEl = document.createElement('td'); //Creates columns for business location name
-    tdEl.textContent = this.name; //Adds business location name to columns
+    tdEl.textContent = this.newLocation; //Adds business location name to columns
     trEl.appendChild(tdEl); //Adds business location name column to row for current business location[i]
     for (var a = 0; a < hours.length; a++) {
       tdEl = document.createElement('td'); //Creates columns for hours
@@ -111,3 +112,37 @@ for (var i = 0; i < cookieStands.length; i++) {
 }
 
 renderTableFooter();
+
+//Below is the Forms Submission
+function renderCookieStand() {
+  tableDataDisplay.innerHTML = ''; //Clear the data table (tableDataDisplay)
+  salesPerHour = []; //Clear the salesByHour array
+  grandTotalSales = 0; //Clear the total sales across all locations
+  renderTableHeader(); //reRender the header for the table
+  for (var i = 0; i < cookieStands.length; i++) { //Loop through the businesses array to render the table
+    cookieStands[i].renderTableBody(); //reRender the table body for the current business[i]
+  }
+  calcGrandTotal(); //Calculate the new sales totals
+  renderTableFooter(); //reRender the footer for the table
+}
+
+function addLocation(event) {
+  event.preventDefault();
+
+  var newLocation = event.target.new_location.value;
+  var minCustomersHour = parseInt(event.target.min_customers.value);
+  var maxCustomersHour = parseInt(event.target.max_customers.value);
+  var avgCookiesCustomer = parseFloat(event.target.avg_cookies.value);
+
+  new CookieStand(newLocation, minCustomersHour, maxCustomersHour, avgCookiesCustomer);
+
+  event.target.new_location.value = null; //Remove text from the form after submission
+  event.target.min_customers.value = null; //Remove text from the form after submission
+  event.target.max_customers.value = null; //Remove text from the form after submission
+  event.target.avg_cookies.value = null; //Remove text from the form after submission
+
+  renderCookieStand(); //reRun the renderBusinesses function to recreate the table
+}
+
+//Create Event Listener for clicks on submit button on newLocation form
+newLocation.addEventListener('submit', addLocation);
